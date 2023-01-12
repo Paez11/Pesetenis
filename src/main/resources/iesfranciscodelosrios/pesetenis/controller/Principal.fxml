@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="back" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesfranciscodelosrios.pesetenis.controller.PrincipalController">
+    <children>
+      <Text fill="WHITE" layoutX="254.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PESETENIS" wrappingWidth="292.693359375">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Text>
+        <Button fx:id="depositBtn" layoutX="49.0" layoutY="289.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Ingresar" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+        </Button>
+      <Button fx:id="exitBtn" layoutX="49.0" layoutY="506.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Salir" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Button>
+      <Button fx:id="withdrawBtn" layoutX="49.0" layoutY="344.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Retirar" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Button>
+      <Button fx:id="extractBtn" layoutX="49.0" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Obtener extracto" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Button>
+      <Button fx:id="transactionBtn" layoutX="49.0" layoutY="453.0" mnemonicParsing="false" onAction="#switchToTransaction" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Transaccion" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="moneyPane" layoutX="151.0" layoutY="94.0" prefHeight="146.0" prefWidth="491.0" styleClass="selectButton">
+         <children>
+            <Text fx:id="money" fill="WHITE" layoutX="18.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="456.69334411621094">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+    </children>
+</AnchorPane>

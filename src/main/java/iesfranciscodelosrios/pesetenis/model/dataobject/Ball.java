@@ -1,6 +1,6 @@
 package iesfranciscodelosrios.pesetenis.model.dataobject;
 
-public class Ball {
+public class Ball extends Thread{
 
     /**
      * Attributes
@@ -40,4 +40,8 @@ public class Ball {
     public float getVelocityY() { return velocityY; }
 
     public void setVelocityY(float velocityY) { this.velocityY = velocityY; }
+
+    public void run(){
+
+    }
 }
