@@ -1,5 +1,6 @@
 package iesfranciscodelosrios.pesetenis.controller;
 
+import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -47,6 +48,17 @@ public class PrincipalController implements Initializable {
         });
     }
 
+    public void switchToEnterTransaction(ActionEvent event) throws IOException {
+        new OperationController("enter");
+        App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+        App.closeScene((Stage) anchorPane.getScene().getWindow());
+    }
+
+    public void switchToExtractTransaction(ActionEvent event) throws IOException {
+        new OperationController("extract");
+        App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+        App.closeScene((Stage) anchorPane.getScene().getWindow());
+    }
 
     public void switchToTransaction(ActionEvent event) throws IOException {
         App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);

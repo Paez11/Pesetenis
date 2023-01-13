@@ -53,9 +53,9 @@ public class Customer extends Thread {
             }
         } else {
             if(transactionType.equals("enter")){
-                account.enterBalance(customerName, amount);
+                account.enterBalance(amount);
             } else if(transactionType.equals("extract")) {
-                account.drawBalance(customerName,amount);
+                account.drawBalance(amount);
             }
             account.setTransaction(true);
         }
