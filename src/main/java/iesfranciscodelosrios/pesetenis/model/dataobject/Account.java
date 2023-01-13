@@ -35,34 +35,29 @@ public class Account {
 
     /**
      * Withdraws an amount from the account
-     * @param name Customer name
      * @param amount Amount to withdraw
+     * @return updated account balance, 0 -> no balance, -1 -> insufficient balance
      */
-    public synchronized void drawBalance(String name, double amount) {
+    public synchronized double drawBalance(double amount) {
         double initialBalance=this.balance;
         if(this.balance>0 && this.balance-amount>=0) {
-            this.balance -= amount;
-            //Mostar saldo inicial en cuenta y disponible tras operacion
-
+            return this.balance -= amount;
         } else {
             if(this.balance==0){
-                //No se puede retirar cantidad, saldo 0
-
+                return 0; //the account has no balance
             } else {
-                //saldo insuficiente
-
+                return -1; //insufficient account balance
             }
         }
     }
 
     /**
      * Increase account balance
-     * @param @param name Customer name
      * @param amount Amount to increase
+     * @return updated account balance
      */
-    public synchronized void enterBalance(String name, double amount) {
+    public synchronized double enterBalance(double amount) {
         double initialBalance=this.balance;
-        this.balance += amount;
-        //Mostar saldo inicial en cuenta y disponible tras operacion
+        return this.balance += amount;
     }
 }
