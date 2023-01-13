@@ -5,18 +5,19 @@ import java.util.Objects;
 
 public class FileM {
     private File file;
-    private Client client;
+    private Customer Customer;
     private Account account;
     private Transition transition;
     private Boolean flag = false;
 
+    public FileM(){}
     public FileM(File file) {
         this.file = file;
     }
 
-    public FileM(File file, Client client, Account account, Transition transition, Boolean flag) {
+    public FileM(File file, Customer Customer, Account account, Transition transition, Boolean flag) {
         this.file = file;
-        this.client = client;
+        this.Customer = Customer;
         this.account = account;
         this.transition = transition;
         this.flag = flag;
@@ -25,11 +26,10 @@ public class FileM {
     /**
      * Method to write in a file, it's synchronized with the method read for the model of Producer-Consumer
      * which means that only one thread can write or read at the same time
-     * @param client the client who made the transition to write in the file
-     * @param account the account of the client who made the transition to write in the file
-     * @param transition the transition to write in the file
+     * @param Customer the Customer who made the transition to write in the file
+     * @param account the account of the Customer who made the transition to write in the file
      */
-    public synchronized void write(Client client, Account account, Transition transition){
+    public synchronized void write(Customer Customer, Account account){
         while (flag){
             try{
                 wait();
@@ -42,14 +42,28 @@ public class FileM {
         FileWriter fw = null;
         try{
             File dir = new File("C:\\Users\\JSK\\Documents\\Transactions");
-            String fileName = client + "_" + account + ".txt";
+            String fileName = Customer + "_" + account + ".txt";
             fw = new FileWriter(new File(dir, fileName));
-            fw.write(client + " " + account + " " + transition);
+            fw.write(Customer + " " + account);
             fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void write(String data){
+        FileWriter fw = null;
+        try{
+            File dir = new File("C:\\Users\\JSK\\Documents\\Transactions");
+            String fileName = "Transitions.txt";
+            fw = new FileWriter(new File(dir, fileName));
+            fw.write(data);
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     /**
      * Method to read a file, it's synchronized with the method write for the model of Producer-Consumer
@@ -91,12 +105,12 @@ public class FileM {
         this.file = file;
     }
 
-    public Client getClient() {
-        return client;
+    public Customer getCustomer() {
+        return Customer;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCustomer(Customer Customer) {
+        this.Customer = Customer;
     }
 
     public Account getAccount() {
@@ -128,7 +142,7 @@ public class FileM {
     public String toString() {
         return "FileM{" +
                 "file=" + file +
-                ", client=" + client +
+                ", Customer=" + Customer +
                 ", account=" + account +
                 ", transition=" + transition +
                 ", flag=" + flag +
