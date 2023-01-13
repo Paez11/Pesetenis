@@ -1,5 +1,8 @@
 package iesfranciscodelosrios.pesetenis.model.dataobject;
 
+import iesfranciscodelosrios.pesetenis.utils.Windows;
+import javafx.stage.Window;
+
 public class Account {
 
     /**
@@ -41,11 +44,14 @@ public class Account {
     public synchronized double drawBalance(double amount) {
         double initialBalance=this.balance;
         if(this.balance>0 && this.balance-amount>=0) {
+            Windows.mostrarInfo("Operación realizada.","Operación realizada.","Cantidad retirada con éxito.");
             return this.balance -= amount;
         } else {
             if(this.balance==0){
+                Windows.mostrarAlerta("Error.","No se pudo realizar la operación.","La cuenta tiene saldo 0.");
                 return 0; //the account has no balance
             } else {
+                Windows.mostrarAlerta("Error.","No se pudo realizar la operación.","Saldo insuficiente en la cuenta.");
                 return -1; //insufficient account balance
             }
         }
@@ -57,6 +63,7 @@ public class Account {
      * @return updated account balance
      */
     public synchronized double enterBalance(double amount) {
+        Windows.mostrarInfo("Operación realizada.","Operación realizada.","Cantidad ingresada con éxito.");
         double initialBalance=this.balance;
         return this.balance += amount;
     }
