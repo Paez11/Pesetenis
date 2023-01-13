@@ -13,17 +13,17 @@
             <Font size="60.0" />
          </font>
       </Text>
-      <Button fx:id="confirmBtn" layoutX="178.0" layoutY="451.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Confirmar" textFill="WHITE">
+      <Button fx:id="confirmBtn" layoutX="178.0" layoutY="451.0" mnemonicParsing="false" onAction="#operation" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Confirmar" textFill="WHITE">
          <font>
             <Font size="60.0" />
          </font>
       </Button>
-      <Button fx:id="CancelBtn" layoutX="403.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToPrincipal" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Cancelar" textFill="WHITE">
+      <Button fx:id="CancelBtn" layoutX="403.0" layoutY="451.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="40.0" prefWidth="203.0" styleClass="selectButton" text="Cancelar" textFill="WHITE">
          <font>
             <Font size="60.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="145.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CANTIDAD A INGRESAR:" wrappingWidth="316.693359375">
+      <Text fill="WHITE" layoutX="145.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INTRODUZCA CANTIDAD:" wrappingWidth="316.693359375">
          <font>
             <Font size="24.0" />
          </font>
