@@ -1,15 +1,20 @@
 package iesfranciscodelosrios.pesetenis.controller;
 
-import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
-import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
+import iesfranciscodelosrios.pesetenis.utils.Operation;
+import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class OperationController {
+public class OperationController extends Operation implements Initializable {
 
     /**
      * Attributes
@@ -22,46 +27,66 @@ public class OperationController {
     private TextField txtAmount;
     @FXML
     private Label lblUpdateBalance;
-    private Account account;
-    private Customer customer;
-    private String transactionType;
 
-    /**
-     * Constructor with params
-     * @param account
-     * @param transactionType
-     */
-    public OperationController(Account account, Customer customer, String transactionType) {
-        this.account=account;
-        this.customer=customer;
-        this.transactionType=transactionType;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> {
+            Windows.closeRequest((Stage) lblOperation.getScene().getWindow());
+        });
+        if(opsTransactionType.equals("enter")) {
+            this.lblOperation.setText("Ingresos");
+        }
+        else if(opsTransactionType.equals("extract")){
+            this.lblOperation.setText("Retiros");
+        }
+        this.lblBalance.setText(String.valueOf(opsAccount.getBalance()+" €"));
     }
-
     @FXML
     public void operation() {
-
-        this.lblBalance.setText(String.valueOf(this.account.getBalance()));
-        if(transactionType.equals("enter")) {
-            this.customer.setTransactionType("enter");
-            this.lblOperation.setText("Ingresos");
-            this.lblUpdateBalance.setText(String.valueOf((this.account.enterBalance(
-                    Double.parseDouble(this.txtAmount.getText())))));
-        }
-        if(transactionType.equals("extract")) {
-            if(Windows.confirmAlert("¿Desea continuar con la transacción?") == ButtonType.OK){
-                this.customer.setTransactionType("extract");
-                this.lblOperation.setText("Retiros");
-                this.lblUpdateBalance.setText(String.valueOf((this.account.drawBalance(
-                        Double.parseDouble(this.txtAmount.getText())))));
+        synchronized (opsAccount){
+            if(!opsAccount.isTransaction()) {
+                opsAccount.notifyAll();
+            }
+            else {
+                if(txtAmount.getText().isEmpty()){
+                    Windows.mostrarInfo("Atención","Cantidad vacía","No ha introducido ninguna cantidad.");
+                }
+                else {
+                    if(Tools.validateAmount(txtAmount.getText())) {
+                        if(opsTransactionType.equals("enter")) {
+                            opsTransactionType="enter";
+                            this.lblUpdateBalance.setText(String.valueOf((opsAccount.enterBalance(
+                                    Double.parseDouble(this.txtAmount.getText())))));
+                        }
+                        if(opsTransactionType.equals("extract")) {
+                            if(Windows.confirmAlert("¿Desea continuar con la transacción?") == ButtonType.OK){
+                                opsTransactionType="extract";
+                                this.lblUpdateBalance.setText(String.valueOf((opsAccount.drawBalance(
+                                        Double.parseDouble(this.txtAmount.getText())))));
+                            }
+                        }
+                        txtAmount.setText("");
+                    }
+                    else {
+                        Windows.mostrarInfo("Atención","Datos no numéricos.","Solo se permite la entrada de datos numéricos (0-9).");
+                        txtAmount.setText("");
+                    }
+                }
             }
         }
     }
 
     @FXML
-    private void closeWindow() {
+    private void closeWindow() throws IOException {
         if(Windows.confirmAlert("¿Desea finalizar la transacción?") == ButtonType.OK){
             Stage stage = (Stage) this.lblOperation.getScene().getWindow();
             stage.close();
+            switchToPrincipal();
         }
+    }
+
+    public void switchToPrincipal() throws IOException {
+        App.loadScene(new Stage(),"Principal","Pesetenis",false,false);
+        App.closeScene((Stage) lblOperation.getScene().getWindow());
     }
 }

@@ -2,6 +2,7 @@ package iesfranciscodelosrios.pesetenis.controller;
 
 import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
+import iesfranciscodelosrios.pesetenis.utils.Operation;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PrincipalController implements Initializable {
+public class PrincipalController extends Operation implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -33,27 +34,28 @@ public class PrincipalController implements Initializable {
     private Button exitBtn;
     @FXML
     private Text money;
-    private Account account;
-    private Customer customer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             Windows.closeRequest((Stage) anchorPane.getScene().getWindow());
         });
-        this.account = new Account();
-        this.customer = new Customer("Mock",0.0,"none",this.account);
+        opsAccount = new Account();
+        opsCustomer = new Customer("Mock",0.0);
+        opsTransactionType="none";
+        Thread customerThread = new Thread(opsCustomer);
+        customerThread.start();
     }
 
     public void switchToEnterTransaction(ActionEvent event) throws IOException {
-        new OperationController(this.account, this.customer,"enter");
-        App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+        opsTransactionType="enter";
+        App.loadScene(new Stage(),"Operation","Pesetenis",false,false);
         App.closeScene((Stage) anchorPane.getScene().getWindow());
     }
 
     public void switchToExtractTransaction(ActionEvent event) throws IOException {
-        new OperationController(this.account, this.customer,"extract");
-        App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+        opsTransactionType="extract";
+        App.loadScene(new Stage(),"Operation","Pesetenis",false,false);
         App.closeScene((Stage) anchorPane.getScene().getWindow());
     }
 
