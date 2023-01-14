@@ -17,4 +17,8 @@ public class Tools {
             return null;
         }
     }
+
+    public static boolean validateAmount(String amount) {
+        return amount.matches("\\d*");
+    }
 }

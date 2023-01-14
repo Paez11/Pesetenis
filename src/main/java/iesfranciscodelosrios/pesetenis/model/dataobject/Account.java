@@ -67,4 +67,12 @@ public class Account {
         double initialBalance=this.balance;
         return this.balance += amount;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "balance=" + balance +
+                ", transaction=" + transaction +
+                '}';
+    }
 }
