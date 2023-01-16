@@ -44,7 +44,7 @@ public class FileM {
         notifyAll();
         FileWriter fw = null;
         try{
-            String fileName = Customer.getCustomerName() + "_" + type + ".txt";
+            String fileName = Customer.getCustomerName() + "_" + "operations.txt";
             file = new File(fileName);
             fw = new FileWriter(file,true);
             fw.write("Customer: "+ Customer.getCustomerName() + "\n balance: " + account.getBalance() +
