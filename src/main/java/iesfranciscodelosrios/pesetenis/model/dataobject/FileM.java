@@ -89,18 +89,33 @@ public class FileM {
         try{
             br = new BufferedReader(new FileReader(file));
             line = br.readLine();
-            if (line.matches("[0-9]+")){
-                balance = Double.valueOf(line);
-            }else {
-                Log.info("Balance not found");
+            while(line!=null) {
+                if(line.indexOf(" balance: ")==0){
+                    balance = Double.valueOf(line.substring(10,line.length()));
+                    /*
+                    if (line.matches("\\d+(.\\d+)?")) {
+                        balance = Double.valueOf(line);
+                    } else {
+                        Log.info("Balance not found");
+                    }
+                     */
+                }
+                line = br.readLine();
             }
-            br.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if(br != null) {
+                    br.close();
+                }
+            }
+            catch (Exception ex) {
+                Log.severe("Could not close the file.");
+            }
         }
         return balance;
     }
-
 
     /**
      *Getters and Setters
@@ -145,7 +160,6 @@ public class FileM {
     public void setFlag(Boolean flag) {
         this.flag = flag;
     }
-
 
     @Override
     public String toString() {

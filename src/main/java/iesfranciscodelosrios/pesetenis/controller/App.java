@@ -11,7 +11,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage){
-        loadScene(new Stage(),"Principal","RedSocial",false,false);
+        loadScene(new Stage(),"Principal","Pesetenis Virtual Transactions",false,false);
     }
 
     /**
