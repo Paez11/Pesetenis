@@ -1,5 +1,6 @@
 package iesfranciscodelosrios.pesetenis.controller;
 
+import iesfranciscodelosrios.pesetenis.model.dataobject.FileM;
 import iesfranciscodelosrios.pesetenis.utils.Operation;
 import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
@@ -10,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,11 +30,15 @@ public class OperationController extends Operation implements Initializable {
     @FXML
     private Label lblUpdateBalance;
 
+    FileM filem = new FileM();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             Windows.closeRequest((Stage) lblOperation.getScene().getWindow());
         });
+
+        //opsAccount.setBalance(filem.read());
         if(opsTransactionType.equals("enter")) {
             this.lblOperation.setText("Ingresos");
         }
@@ -74,6 +80,7 @@ public class OperationController extends Operation implements Initializable {
                 }
             }
         }
+        filem.write(opsCustomer,opsAccount,opsTransactionType);
     }
 
     @FXML

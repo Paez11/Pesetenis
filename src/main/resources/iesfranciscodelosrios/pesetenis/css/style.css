@@ -1,5 +1,17 @@
+
+
+.front{
+    -fx-background-color: linear-gradient(to bottom, #0f004f, #00337C);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 30, 0, 0, 0);
+}
+
+.front2{
+    -fx-background-color: linear-gradient(to bottom, #cecece,#EEEEEE);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 15, 0, 0, 0);
+}
+
 .back{
-    -fx-background-color: #000000;
+    -fx-background-color: linear-gradient(to bottom, #cecece,#EEEEEE);
 }
 
 .racket{
@@ -11,14 +23,33 @@
     -fx-text-fill: #ffffff;
 }
 
-.selectButton{
+.moneyPane{
     -fx-background-color: transparent;
-    -fx-border-color: #9b9b9b;
+    -fx-border-color: #ECECEC;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.moneyPane:hover{
+    -fx-background-color: rgba(122, 122, 122, 0.26);
+}
+
+.fontTxt{
+    -fx-font-family: "Consolas";
+}
+
+.selectButton{
+    -fx-background-color: #00337C;
+    -fx-border-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 12 pt;
     -fx-font-weight: bold;
+    -fx-font-family: "Consolas";
     -fx-cursor: hand;
     -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 0, 0, 0, 3);
 }
 
 .selectButton:hover{

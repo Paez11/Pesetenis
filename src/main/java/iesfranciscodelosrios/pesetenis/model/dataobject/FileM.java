@@ -1,6 +1,9 @@
 package iesfranciscodelosrios.pesetenis.model.dataobject;
 
+import iesfranciscodelosrios.pesetenis.utils.Log;
+
 import java.io.*;
+import java.net.URL;
 import java.util.Objects;
 
 public class FileM {
@@ -29,7 +32,7 @@ public class FileM {
      * @param Customer the Customer who made the transition to write in the file
      * @param account the account of the Customer who made the transition to write in the file
      */
-    public synchronized void write(Customer Customer, Account account){
+    public synchronized void write(Customer Customer, Account account, String type){
         while (flag){
             try{
                 wait();
@@ -41,10 +44,11 @@ public class FileM {
         notifyAll();
         FileWriter fw = null;
         try{
-            File dir = new File("C:\\Users\\JSK\\Documents\\Transactions");
-            String fileName = Customer + "_" + account + ".txt";
-            fw = new FileWriter(new File(dir, fileName));
-            fw.write(Customer + " " + account);
+            String fileName = Customer.getCustomerName() + "_" + type + ".txt";
+            file = new File(fileName);
+            fw = new FileWriter(file,true);
+            fw.write("Customer: "+ Customer.getCustomerName() + "\n balance: " + account.getBalance() +
+                    "\n type: " + type + "\n---------------");
             fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -54,9 +58,8 @@ public class FileM {
     public void write(String data){
         FileWriter fw = null;
         try{
-            File dir = new File("C:\\Users\\JSK\\Documents\\Transactions");
             String fileName = "Transitions.txt";
-            fw = new FileWriter(new File(dir, fileName));
+            fw = new FileWriter(fileName);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
@@ -70,8 +73,9 @@ public class FileM {
      * which means that only one thread can write or read at the same time
      * @return the transition read from the file
      */
-    public synchronized String read(){
+    public synchronized Double read(){
         String line = "";
+        Double balance = 0.0;
         while (!flag){
             try{
                 wait();
@@ -85,11 +89,16 @@ public class FileM {
         try{
             br = new BufferedReader(new FileReader(file));
             line = br.readLine();
+            if (line.matches("[0-9]+")){
+                balance = Double.valueOf(line);
+            }else {
+                Log.info("Balance not found");
+            }
             br.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return line;
+        return balance;
     }
 
 
