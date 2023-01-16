@@ -37,8 +37,6 @@ public class OperationController extends Operation implements Initializable {
         Platform.runLater(() -> {
             Windows.closeRequest((Stage) lblOperation.getScene().getWindow());
         });
-
-        //opsAccount.setBalance(filem.read());
         if(opsTransactionType.equals("enter")) {
             this.lblOperation.setText("Ingresos");
         }

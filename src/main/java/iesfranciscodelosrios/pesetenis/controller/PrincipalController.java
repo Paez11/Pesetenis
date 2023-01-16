@@ -2,6 +2,7 @@ package iesfranciscodelosrios.pesetenis.controller;
 
 import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
+import iesfranciscodelosrios.pesetenis.model.dataobject.FileM;
 import iesfranciscodelosrios.pesetenis.utils.Operation;
 import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
@@ -10,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -71,6 +73,7 @@ public class PrincipalController extends Operation implements Initializable {
     }
 
     public void exit(ActionEvent event)throws  IOException{
+        if(Windows.confirmAlert("¿Desea finalizar la aplicación?") == ButtonType.OK)
         App.closeScene((Stage) anchorPane.getScene().getWindow());
     }
 }
