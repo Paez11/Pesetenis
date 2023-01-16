@@ -47,6 +47,7 @@ public class OperationController extends Operation implements Initializable {
         }
         this.lblBalance.setText(String.valueOf(opsAccount.getBalance()+" €"));
     }
+
     @FXML
     public void operation() {
         synchronized (opsAccount){
@@ -71,12 +72,11 @@ public class OperationController extends Operation implements Initializable {
                                         Double.parseDouble(this.txtAmount.getText())))));
                             }
                         }
-                        txtAmount.setText("");
                     }
                     else {
                         Windows.mostrarInfo("Atención","Datos no numéricos.","Solo se permite la entrada de datos numéricos (0-9).");
-                        txtAmount.setText("");
                     }
+                    txtAmount.setText("");
                 }
             }
         }
