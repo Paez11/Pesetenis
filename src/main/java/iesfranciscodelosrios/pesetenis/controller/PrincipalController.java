@@ -3,6 +3,7 @@ package iesfranciscodelosrios.pesetenis.controller;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
 import iesfranciscodelosrios.pesetenis.utils.Operation;
+import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -45,6 +46,11 @@ public class PrincipalController extends Operation implements Initializable {
         opsTransactionType="none";
         Thread customerThread = new Thread(opsCustomer);
         customerThread.start();
+        money.setText(String.valueOf(opsAccount.getBalance()+" €"));
+    }
+
+    public void extract() throws IOException {
+        Tools.getFileFromFileChooser();
     }
 
     public void switchToEnterTransaction(ActionEvent event) throws IOException {
@@ -61,6 +67,10 @@ public class PrincipalController extends Operation implements Initializable {
 
     public void switchToTransaction(ActionEvent event) throws IOException {
         App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+        App.closeScene((Stage) anchorPane.getScene().getWindow());
+    }
+
+    public void exit(ActionEvent event)throws  IOException{
         App.closeScene((Stage) anchorPane.getScene().getWindow());
     }
 }
