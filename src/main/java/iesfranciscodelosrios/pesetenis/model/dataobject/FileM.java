@@ -26,6 +26,11 @@ public class FileM {
         this.flag = flag;
     }
 
+    public FileM(File file, Customer Customer) {
+        this.file = file;
+        this.Customer = Customer;
+    }
+
     /**
      * Method to write in a file, it's synchronized with the method read for the model of Producer-Consumer
      * which means that only one thread can write or read at the same time

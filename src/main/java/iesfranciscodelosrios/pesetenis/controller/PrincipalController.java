@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,8 +51,12 @@ public class PrincipalController extends Operation implements Initializable {
         Platform.runLater(() -> {
             Windows.closeRequest((Stage) anchorPane.getScene().getWindow());
         });
-        opsAccount = new Account();
         opsCustomer = new Customer("Mock",0.0);
+        String fileName = opsCustomer.getCustomerName() + "_" + "operations.txt";
+        FileM filem = new FileM(new File(fileName),opsCustomer);
+        consumer = new Consumer(filem," balance: ");
+        consumer.start();
+        opsAccount = new Account();
         opsTransactionType="none";
         Thread customerThread = new Thread(opsCustomer);
         customerThread.start();
