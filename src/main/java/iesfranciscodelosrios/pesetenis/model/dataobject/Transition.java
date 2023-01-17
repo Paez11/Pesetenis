@@ -16,13 +16,11 @@ public class Transition extends Thread {
 
     public void run(){
         FileM fileM = new FileM();
-        Double result=0.0;
-        synchronized (result=fileM.read(type)){
-            if(type.equals("enter")){
-                deposit = result.intValue();
-            } else if (type.equals("extract")) {
-                withdraw = result.intValue();
-            }
+        Double result = fileM.read(" type: "+type);
+        if(type.equals("enter")){
+            deposit = result.intValue();
+        } else if (type.equals("extract")) {
+            withdraw = result.intValue();
         }
     }
 
