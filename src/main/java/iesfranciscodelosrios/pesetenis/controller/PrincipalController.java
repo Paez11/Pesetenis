@@ -1,6 +1,7 @@
 package iesfranciscodelosrios.pesetenis.controller;
 
 import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
+import iesfranciscodelosrios.pesetenis.model.dataobject.Consumer;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
 import iesfranciscodelosrios.pesetenis.model.dataobject.FileM;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Transition;
