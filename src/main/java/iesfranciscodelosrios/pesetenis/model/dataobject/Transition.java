@@ -2,6 +2,7 @@ package iesfranciscodelosrios.pesetenis.model.dataobject;
 
 import iesfranciscodelosrios.pesetenis.utils.Log;
 
+import java.io.File;
 import java.util.List;
 
 public class Transition extends Thread {
@@ -15,7 +16,8 @@ public class Transition extends Thread {
     }
 
     public void run(){
-        FileM fileM = new FileM();
+        FileM fileM = new FileM(new File("Mock_operations.txt"));
+        fileM.setFlag(true);
         Double result = fileM.read(" type: "+type);
         if(type.equals("enter")){
             deposit = result.intValue();
