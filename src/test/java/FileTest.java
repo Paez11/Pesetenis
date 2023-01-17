@@ -11,7 +11,8 @@ public class FileTest {
     public void writeTest(){
         FileM filem = new FileM();
         String test = "test";
+        String filter = " balance: ";
         filem.write(test);
-        assertEquals(true,filem.read());
+        assertEquals(true,filem.read(filter));
     }
 }

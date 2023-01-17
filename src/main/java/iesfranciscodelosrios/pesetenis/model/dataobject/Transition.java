@@ -5,42 +5,25 @@ import iesfranciscodelosrios.pesetenis.utils.Log;
 import java.util.List;
 
 public class Transition extends Thread {
-    private List<String> tipes;
+
     private int deposit;
     private int withdraw;
+    private String type;
 
-    public Transition(List<String> tipes) {
-        this.tipes = tipes;
+    public Transition(String type) {
+        this.type = type;
     }
-
-    public Transition(List<String> tipes, int deposit, int withdraw) {
-        this.tipes = tipes;
-        this.deposit = deposit;
-        this.withdraw = withdraw;
-    }
-
 
     public void run(){
         FileM fileM = new FileM();
-        for (int i = 0; i < tipes.size(); i++){
-            if (tipes.get(i).equals("ingreso")){
-                deposit++;
-                fileM.write("ingreso"+deposit);
-            }else if (tipes.get(i).equals("retiro")){
-                withdraw++;
-                fileM.write("retiro"+withdraw);
-            }else {
-                Log.info("nada");
+        Double result=0.0;
+        synchronized (result=fileM.read(type)){
+            if(type.equals("enter")){
+                deposit = result.intValue();
+            } else if (type.equals("extract")) {
+                withdraw = result.intValue();
             }
         }
-    }
-
-    public List<String> getTipes() {
-        return tipes;
-    }
-
-    public void setTipes(List<String> tipes) {
-        this.tipes = tipes;
     }
 
     public int getDeposit() {
@@ -57,14 +40,5 @@ public class Transition extends Thread {
 
     public void setWithdraw(int withdraw) {
         this.withdraw = withdraw;
-    }
-
-    @Override
-    public String toString() {
-        return "Transition{" +
-                "tipes=" + tipes +
-                ", deposit=" + deposit +
-                ", withdraw=" + withdraw +
-                '}';
     }
 }

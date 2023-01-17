@@ -37,6 +37,10 @@ public class PrincipalController extends Operation implements Initializable {
     private Button exitBtn;
     @FXML
     private Text money;
+    @FXML
+    private Button btnStadistics;
+    @FXML
+    private AnchorPane paneStadistics;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,6 +53,11 @@ public class PrincipalController extends Operation implements Initializable {
         Thread customerThread = new Thread(opsCustomer);
         customerThread.start();
         money.setText(String.valueOf(opsAccount.getBalance()+" €"));
+    }
+
+    @FXML
+    public void showStadistics(){
+
     }
 
     public void extract() throws IOException {
