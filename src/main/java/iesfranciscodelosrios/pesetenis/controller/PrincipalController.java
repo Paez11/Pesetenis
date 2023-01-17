@@ -73,7 +73,7 @@ public class PrincipalController extends Operation implements Initializable {
             throw new RuntimeException(e);
         }
         txtStadistics.setText(t1.getName()+": "+t1.getDeposit() +"\n"+
-                                t2.getName()+": "+t2.getWithdraw() +
+                                t2.getName()+": "+t2.getWithdraw() +"\n"+
                                 "Cuenta total de transacciones: "+(t1.getDeposit()+t2.getWithdraw()));
     }
 
