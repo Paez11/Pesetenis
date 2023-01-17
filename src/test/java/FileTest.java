@@ -22,7 +22,7 @@ public class FileTest {
         String filter = " balance: ";
         Double account = 200010.0;
         Double balance = 0.0;
-        balance=filem.readTest(filter);
+        balance=filem.read(filter);
         assertEquals(account,balance);
     }
 

@@ -11,7 +11,7 @@ public class Consumer extends Thread {
     }
 
     public void run(){
-        userBalance=fm.read(filter);
+        setUserBalance(fm.read(filter));
     }
 
     public FileM getFm() {
