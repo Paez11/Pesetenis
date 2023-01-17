@@ -14,4 +14,5 @@ public abstract class Operation {
     protected static Producer producer;
 
     protected static Consumer consumer;
+
 }
