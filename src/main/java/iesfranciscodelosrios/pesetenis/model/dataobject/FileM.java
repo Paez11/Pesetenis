@@ -72,7 +72,7 @@ public class FileM {
      * which means that only one thread can write or read at the same time
      * @return the transition read from the file
      */
-    public synchronized Double read(String filter){;
+    public synchronized Double read(String filter) {
         Double result = 0.0;
         String line = "";
         while (!flag){
@@ -93,13 +93,6 @@ public class FileM {
                     if(filter.equals(" balance: ")) result = Double.valueOf(line.substring(filter.length(),line.length()));
                     else result++;
                 }
-                /*
-                if (line.matches("\\d+(.\\d+)?")) {
-                    balance = Double.valueOf(line);
-                } else {
-                    Log.info("Balance not found");
-                }
-                */
                 line = br.readLine();
             }
         } catch (IOException e) {

@@ -3,6 +3,7 @@ package iesfranciscodelosrios.pesetenis.controller;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Account;
 import iesfranciscodelosrios.pesetenis.model.dataobject.Customer;
 import iesfranciscodelosrios.pesetenis.model.dataobject.FileM;
+import iesfranciscodelosrios.pesetenis.model.dataobject.Transition;
 import iesfranciscodelosrios.pesetenis.utils.Operation;
 import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,7 +42,7 @@ public class PrincipalController extends Operation implements Initializable {
     @FXML
     private Button btnStadistics;
     @FXML
-    private AnchorPane paneStadistics;
+    private TextArea txtStadistics;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,7 +59,22 @@ public class PrincipalController extends Operation implements Initializable {
 
     @FXML
     public void showStadistics(){
-
+        // Cooperatings threads
+        Transition t1 = new Transition("enter");
+        Transition t2 = new Transition("extract");
+        t1.setName("Hilo Contador de Ingresos");
+        t2.setName("Hilo Contador de Retiradas");
+        t1.run();
+        t2.run();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        txtStadistics.setText(t1.getName()+": "+t1.getDeposit() +"\n"+
+                                t2.getName()+": "+t2.getWithdraw() +
+                                "Cuenta total de transacciones: "+(t1.getDeposit()+t2.getWithdraw()));
     }
 
     public void extract() throws IOException {
