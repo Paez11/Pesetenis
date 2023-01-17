@@ -26,6 +26,11 @@ public class FileM {
         this.flag = flag;
     }
 
+    public FileM(File file, Customer Customer) {
+        this.file = file;
+        this.Customer = Customer;
+    }
+
     /**
      * Method to write in a file, it's synchronized with the method read for the model of Producer-Consumer
      * which means that only one thread can write or read at the same time
@@ -67,15 +72,14 @@ public class FileM {
         }
     }
 
-
     /**
      * Method to read a file, it's synchronized with the method write for the model of Producer-Consumer
      * which means that only one thread can write or read at the same time
      * @return the transition read from the file
      */
-    public synchronized Double read(){
+    public synchronized Double read(String filter) {
+        Double result = 0.0;
         String line = "";
-        Double balance = 0.0;
         while (!flag){
             try{
                 wait();
@@ -90,15 +94,9 @@ public class FileM {
             br = new BufferedReader(new FileReader(file));
             line = br.readLine();
             while(line!=null) {
-                if(line.indexOf(" balance: ")==0){
-                    balance = Double.valueOf(line.substring(10,line.length()));
-                    /*
-                    if (line.matches("\\d+(.\\d+)?")) {
-                        balance = Double.valueOf(line);
-                    } else {
-                        Log.info("Balance not found");
-                    }
-                     */
+                if(line.indexOf(filter)==0){
+                    if(filter.equals(" balance: ")) result = Double.valueOf(line.substring(filter.length(),line.length()));
+                    else result++;
                 }
                 line = br.readLine();
             }
@@ -114,7 +112,7 @@ public class FileM {
                 Log.severe("Could not close the file.");
             }
         }
-        return balance;
+        return result;
     }
 
     /**

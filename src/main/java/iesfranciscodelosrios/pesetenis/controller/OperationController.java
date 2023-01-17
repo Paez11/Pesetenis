@@ -1,6 +1,7 @@
 package iesfranciscodelosrios.pesetenis.controller;
 
 import iesfranciscodelosrios.pesetenis.model.dataobject.FileM;
+import iesfranciscodelosrios.pesetenis.model.dataobject.Producer;
 import iesfranciscodelosrios.pesetenis.utils.Operation;
 import iesfranciscodelosrios.pesetenis.utils.Tools;
 import iesfranciscodelosrios.pesetenis.utils.Windows;
@@ -78,7 +79,8 @@ public class OperationController extends Operation implements Initializable {
                 }
             }
         }
-        filem.write(opsCustomer,opsAccount,opsTransactionType);
+        producer = new Producer(filem,opsAccount,opsCustomer,opsTransactionType);
+        producer.start();
     }
 
     @FXML
