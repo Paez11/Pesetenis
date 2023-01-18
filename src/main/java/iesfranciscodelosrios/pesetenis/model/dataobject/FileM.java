@@ -60,18 +60,6 @@ public class FileM {
         }
     }
 
-    public void write(String data){
-        FileWriter fw = null;
-        try{
-            String fileName = "Transitions.txt";
-            fw = new FileWriter(fileName);
-            fw.write(data);
-            fw.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Method to read a file, it's synchronized with the method write for the model of Producer-Consumer
      * which means that only one thread can write or read at the same time
