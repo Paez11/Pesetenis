@@ -55,15 +55,15 @@ public class PrincipalController extends Operation implements Initializable {
         String fileName = opsCustomer.getCustomerName() + "_" + "operations.txt";
         FileM filem = new FileM(new File(fileName),opsCustomer);
         consumer = new Consumer(filem," balance: ");
-        consumer.start();
+        filem.setFlag(true);
+        consumer.setUserBalance(filem.read(" balance: "));
         opsAccount = new Account();
         opsTransactionType="none";
         Thread customerThread = new Thread(opsCustomer);
         customerThread.start();
-        FileM f = new FileM(new File("Mock_operations.txt"));
-        f.setFlag(true);
-        opsAccount.setBalance(f.read(" balance: "));
-        f.setFlag(false);
+        consumer.start();
+        opsAccount.setBalance(consumer.getUserBalance());
+        filem.setFlag(false);
         money.setText(String.valueOf(opsAccount.getBalance()+" €"));
     }
 
@@ -91,20 +91,21 @@ public class PrincipalController extends Operation implements Initializable {
         Tools.getFileFromFileChooser();
     }
 
-    public void switchToEnterTransaction(ActionEvent event) throws IOException {
-        opsTransactionType="enter";
-        App.loadScene(new Stage(),"Operation","Pesetenis",false,false);
-        App.closeScene((Stage) anchorPane.getScene().getWindow());
+    public void switchPane(ActionEvent event) throws IOException {
+        Object source = event.getSource();
+        if (depositBtn.equals(source)){
+            opsTransactionType="enter";
+            go("Operation");
+        } else if (withdrawBtn.equals(source)) {
+            opsTransactionType="extract";
+            go("Operation");
+        } else if (transactionBtn.equals(source)) {
+            go("Transaction");
+        }
     }
 
-    public void switchToExtractTransaction(ActionEvent event) throws IOException {
-        opsTransactionType="extract";
-        App.loadScene(new Stage(),"Operation","Pesetenis",false,false);
-        App.closeScene((Stage) anchorPane.getScene().getWindow());
-    }
-
-    public void switchToTransaction(ActionEvent event) throws IOException {
-        App.loadScene(new Stage(),"Transaction","Pesetenis",false,false);
+    public void go(String fxml) throws IOException {
+        App.loadScene(new Stage(),fxml,"Pesetenis",false,false);
         App.closeScene((Stage) anchorPane.getScene().getWindow());
     }
 

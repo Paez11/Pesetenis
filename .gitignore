@@ -1,6 +1,7 @@
 target
 .mvn
 *.txt
+*.iml
 
 # Compiled class file
 *.class
