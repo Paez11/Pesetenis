@@ -60,6 +60,10 @@ public class PrincipalController extends Operation implements Initializable {
         opsTransactionType="none";
         Thread customerThread = new Thread(opsCustomer);
         customerThread.start();
+        FileM f = new FileM(new File("Mock_operations.txt"));
+        f.setFlag(true);
+        opsAccount.setBalance(f.read(" balance: "));
+        f.setFlag(false);
         money.setText(String.valueOf(opsAccount.getBalance()+" €"));
     }
 

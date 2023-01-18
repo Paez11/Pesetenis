@@ -52,8 +52,8 @@ public class FileM {
             String fileName = Customer.getCustomerName() + "_" + "operations.txt";
             file = new File(fileName);
             fw = new FileWriter(file,true);
-            fw.write("Customer: "+ Customer.getCustomerName() + "\n balance: " + account.getBalance() +
-                    "\n type: " + type + "\n---------------");
+            fw.write("\nCustomer: "+ Customer.getCustomerName() + "\n balance: " + account.getBalance() +
+                    "\n type: " + type + "\n---------------\n");
             fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
