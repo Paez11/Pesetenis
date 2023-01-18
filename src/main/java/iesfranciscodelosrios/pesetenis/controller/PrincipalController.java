@@ -74,8 +74,8 @@ public class PrincipalController extends Operation implements Initializable {
         Transition t2 = new Transition("extract");
         t1.setName("Hilo Contador de Ingresos");
         t2.setName("Hilo Contador de Retiradas");
-        t1.run();
-        t2.run();
+        t1.start();
+        t2.start();
         try {
             t1.join();
             t2.join();
